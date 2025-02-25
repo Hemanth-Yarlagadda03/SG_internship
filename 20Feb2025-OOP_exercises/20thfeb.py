@@ -1,3 +1,4 @@
+
 """
 Collection of exercises demonstrating Python programming concepts.
 
@@ -7,16 +8,17 @@ and OOP concepts including inheritance, polymorphism, and decorators.
 
 import math
 from abc import ABC, abstractmethod
+from typing import List, Dict
 
 
-def find_unique_elements():
+def find_unique_elements() -> None:
     """Count number of unique elements in a list."""
     numbers = map(int, input().split())
     unique_numbers = set(numbers)
     print(len(unique_numbers))
 
 
-def product_excluding_duplicates():
+def product_excluding_duplicates() -> None:
     """Calculate product of elements excluding duplicates."""
     numbers = map(int, input().split())
     unique_numbers = set(numbers)
@@ -26,11 +28,11 @@ def product_excluding_duplicates():
     print(result)
 
 
-def find_elements_above_frequency(numbers, k):
+def find_elements_above_frequency(numbers: List[int], k: int) -> List[int]:
     """Extract elements with frequency greater than k."""
-    unique = []
-    frequency = {}
-    result = []
+    unique: List[int] = []
+    frequency: Dict[int, int] = {}
+    result: List[int] = []
 
     for num in numbers:
         if num not in unique:
@@ -43,31 +45,30 @@ def find_elements_above_frequency(numbers, k):
     return result
 
 
-def check_range(numbers, lower, upper):
+def check_range(numbers: List[int], lower: int, upper: int) -> bool:
     """Check if all elements are within the given range."""
     return all(lower <= num <= upper for num in numbers)
 
 
-def find_consecutive_numbers(numbers):
+def find_consecutive_numbers(numbers: List[int]) -> str:
     """Check if list has three consecutive common numbers."""
-    numbers = list(numbers)
     for i in range(len(numbers) - 2):
         if numbers[i] == numbers[i + 1] == numbers[i + 2]:
             return "Found"
     return "Not Found"
 
 
-def find_strongest_neighbors(numbers):
+def find_strongest_neighbors(numbers: List[int]) -> List[int]:
     """Find strongest neighbor for each pair of elements."""
     return [max(numbers[i], numbers[i + 1]) for i in range(len(numbers) - 1)]
 
 
-def remove_element(numbers, target):
+def remove_element(numbers: List[int], target: int) -> List[int]:
     """Remove all instances of an element from list."""
     return [num for num in numbers if num != target]
 
 
-def get_last_n_elements(numbers, n):
+def get_last_n_elements(numbers: List[int], n: int) -> List[int]:
     """Get the last n elements from a list."""
     return numbers[-n:]
 
@@ -75,11 +76,11 @@ def get_last_n_elements(numbers, n):
 class Student:
     """Class representing a student with name and grade."""
 
-    def __init__(self, name, grade):
+    def __init__(self, name: str, grade: float) -> None:
         self.name = name
         self.grade = grade
 
-    def display_info(self):
+    def display_info(self) -> None:
         """Display student information."""
         print(f"{self.name} {self.grade}")
 
@@ -87,31 +88,31 @@ class Student:
 class Book:
     """Class representing a book in library."""
 
-    def __init__(self, name, author, copies):
+    def __init__(self, name: str, author: str, copies: int) -> None:
         self.name = name
         self.author = author
         self.copies = copies
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name} by {self.author} - {self.copies}"
 
 
 class Library:
     """Class representing a library and its operations."""
 
-    def __init__(self):
-        self.books = []
+    def __init__(self) -> None:
+        self.books: List[Book] = []
 
-    def add_book(self, book):
+    def add_book(self, book: Book) -> None:
         """Add a book to the library."""
         self.books.append(book)
 
-    def display_books(self):
+    def display_books(self) -> None:
         """Display all books in the library."""
         for book in self.books:
             print(book)
 
-    def borrow_book(self, name):
+    def borrow_book(self, name: str) -> None:
         """Process book borrowing request."""
         for book in self.books:
             if book.name == name and book.copies > 0:
@@ -124,11 +125,11 @@ class Library:
 class BankAccount:
     """Base class for bank accounts."""
 
-    def __init__(self, name, balance):
+    def __init__(self, name: str, balance: float) -> None:
         self._name = name
         self._balance = balance
 
-    def deposit(self, amount):
+    def deposit(self, amount: float) -> None:
         """Process deposit transaction."""
         if amount <= 2_000_000:
             self._balance += amount
@@ -136,7 +137,7 @@ class BankAccount:
         else:
             print("Amount exceeds deposit limit of 20,00,000 rupees")
 
-    def withdraw(self, amount):
+    def withdraw(self, amount: float) -> None:
         """Process withdrawal transaction."""
         if amount > 2_000_000:
             print("Amount exceeds withdrawal limit of 20,00,000 rupees")
@@ -146,7 +147,7 @@ class BankAccount:
         else:
             print("Minimum balance of 5000 rupees must be maintained")
 
-    def get_balance(self):
+    def get_balance(self) -> float:
         """Return current balance."""
         return self._balance
 
@@ -154,11 +155,11 @@ class BankAccount:
 class Employee:
     """Base class for employees."""
 
-    def __init__(self, name, salary):
+    def __init__(self, name: str, salary: float) -> None:
         self.name = name
         self.salary = salary
 
-    def display_details(self):
+    def display_details(self) -> None:
         """Display employee details."""
         print(f"Employee: {self.name}, Salary: {self.salary}")
 
@@ -166,11 +167,11 @@ class Employee:
 class Manager(Employee):
     """Class representing a manager, derived from Employee."""
 
-    def __init__(self, name, salary, department):
+    def __init__(self, name: str, salary: float, department: str) -> None:
         super().__init__(name, salary)
         self.department = department
 
-    def display_details(self):
+    def display_details(self) -> None:
         """Display manager details including department."""
         super().display_details()
         print(f"Department: {self.department}")
@@ -179,7 +180,7 @@ class Manager(Employee):
 class Animal:
     """Base class for animals."""
 
-    def speak(self):
+    def speak(self) -> str:
         """Return generic animal sound."""
         return "Sound!"
 
@@ -187,7 +188,7 @@ class Animal:
 class Dog(Animal):
     """Class representing a dog."""
 
-    def speak(self):
+    def speak(self) -> str:
         """Return dog's sound."""
         return "Bark!"
 
@@ -195,7 +196,7 @@ class Dog(Animal):
 class Cat(Animal):
     """Class representing a cat."""
 
-    def speak(self):
+    def speak(self) -> str:
         """Return cat's sound."""
         return "Meow!"
 
@@ -203,11 +204,11 @@ class Cat(Animal):
 class Calculator:
     """Class implementing basic calculator operations."""
 
-    def add(self, *args):
+    def add(self, *args: float) -> float:
         """Add variable number of arguments."""
         return sum(args)
 
-    def multiply(self, *args):
+    def multiply(self, *args: float) -> float:
         """Multiply variable number of arguments."""
         return math.prod(args)
 
@@ -215,11 +216,11 @@ class Calculator:
 class CreditAccount:
     """Class representing a credit account."""
 
-    def __init__(self, credit_limit):
+    def __init__(self, credit_limit: float) -> None:
         self._credit_limit = credit_limit
-        self._credit_used = 0
+        self._credit_used = 0.0
 
-    def use_credit(self, amount):
+    def use_credit(self, amount: float) -> None:
         """Process credit usage."""
         if amount <= self._credit_limit - self._credit_used:
             self._credit_used += amount
@@ -227,7 +228,7 @@ class CreditAccount:
         else:
             print("Credit limit exceeded!")
 
-    def pay_credit(self, amount):
+    def pay_credit(self, amount: float) -> None:
         """Process credit payment."""
         if amount <= self._credit_used:
             self._credit_used -= amount
@@ -235,27 +236,30 @@ class CreditAccount:
         else:
             print("Invalid credit payment amount")
 
-    def get_credit_details(self):
+    def get_credit_details(self) -> str:
         """Return credit account details."""
-        return f"Credit Limit: {self._credit_limit} rupees, Used: {self._credit_used} rupees"
+        return (
+            f"Credit Limit: {self._credit_limit} rupees, "
+            f"Used: {self._credit_used} rupees"
+        )
 
 
 class Order(ABC):
     """Abstract base class for orders."""
 
-    def __init__(self, items):
+    def __init__(self, items: Dict[str, float]) -> None:
         self.items = items
 
     @abstractmethod
-    def calculate_total(self):
+    def calculate_total(self) -> float:
         """Calculate total order amount."""
-        pass
+        raise NotImplementedError("Subclasses must implement calculate_total.")
 
 
 class DineIn(Order):
     """Class representing dine-in orders."""
 
-    def calculate_total(self):
+    def calculate_total(self) -> float:
         """Calculate total with dine-in markup."""
         return sum(self.items.values()) * 1.2
 
@@ -263,7 +267,7 @@ class DineIn(Order):
 class Takeout(Order):
     """Class representing takeout orders."""
 
-    def calculate_total(self):
+    def calculate_total(self) -> float:
         """Calculate total for takeout."""
         return sum(self.items.values())
 
@@ -271,7 +275,7 @@ class Takeout(Order):
 class Online(Order):
     """Class representing online orders."""
 
-    def calculate_total(self):
+    def calculate_total(self) -> float:
         """Calculate total with online markup."""
         return sum(self.items.values()) * 1.5
 
@@ -279,18 +283,18 @@ class Online(Order):
 class Product:
     """Class representing a product with price and discount."""
 
-    def __init__(self, name, price):
+    def __init__(self, name: str, price: float) -> None:
         self.name = name
         self._price = price
         self._discount = 0
 
     @property
-    def price(self):
+    def price(self) -> float:
         """Calculate final price after discount."""
         return self._price - (self._price * self._discount / 100)
 
     @price.setter
-    def price(self, new_price):
+    def price(self, new_price: float) -> None:
         """Set new base price."""
         if new_price > 0:
             self._price = new_price
@@ -298,12 +302,12 @@ class Product:
             print("Price must be positive!")
 
     @property
-    def discount(self):
+    def discount(self) -> int:
         """Get current discount percentage."""
         return self._discount
 
     @discount.setter
-    def discount(self, percentage):
+    def discount(self, percentage: int) -> None:
         """Set discount percentage."""
         if 0 <= percentage <= 50:
             self._discount = percentage
@@ -311,7 +315,7 @@ class Product:
             print("Invalid discount percentage!")
 
 
-def main():
+def main() -> None:
     """Main function to demonstrate class usage."""
     # Library demonstration
     library = Library()
@@ -330,7 +334,7 @@ def main():
     orders = [
         DineIn({"Burger": 250, "Fries": 95}),
         Takeout({"Pasta": 490, "Wine": 300}),
-        Online({"Salad": 315, "Bread": 60})
+        Online({"Salad": 315, "Bread": 60}),
     ]
     for order in orders:
         print(f"{order.__class__.__name__}: {order.calculate_total():.2f}")
